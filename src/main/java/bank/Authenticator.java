@@ -3,10 +3,12 @@ package bank;
 import javax.security.auth.login.LoginException;
 
 public class Authenticator {
+
   //creating two methods - login and logout
-  public static Customer login(String username, String password){
+  public static Customer login(String username, String password) throws LoginException{
     Customer customer = DataSource.getCustomer(username);
-    if(customer== null){
+
+    if(customer == null){
       throw new LoginException("Username not found");
     }
     //comparing objects
@@ -18,7 +20,7 @@ public class Authenticator {
   }
 
   public static void logout(Customer customer){
-    customer.getAuthenticated(false);
+    customer.setAuthenticated(false);
   }
   
 }

@@ -1,5 +1,6 @@
 package bank;
 
+import java.beans.Statement;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.PreparedStatement;
@@ -67,10 +68,30 @@ public class DataSource {
     return account;
   }
 
-  public static void main(String args[]){
-    //connect();
-    Customer customer =  getCustomer("clillea8@nasa.gov");
-    Account account = getAccount(customer.getAccountId());
-    System.out.println(account.getBalance());
+
+  public static void updateAccountBalance(int accounId, double balance){
+    String sql = "update accounts set balance =? where id = ?";
+    try{
+      Statement.setDouble(1, balance);
+      Statement.setInt(2, accounId);
+
+      statement.executeUpdate();
+    }catch(SQLException e){
+      e.printStackTrace();
+    }
   }
+
+
+// removing this main method now, because it is created only for testing, now 
+// we will use the main method of class menu 
+
+
+  // public static void main(String args[]){
+  //   //connect();
+  //   Customer customer =  getCustomer("clillea8@nasa.gov");
+  //   Account account = getAccount(customer.getAccountId());
+  //   System.out.println(account.getBalance());
+  // }
+
+  
 }
